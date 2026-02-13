@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldry | Ultra Pro Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#060b1a;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* CURSOR GLOW */
+.cursor{
+    position:fixed;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:rgba(0,212,255,0.7);
+    pointer-events:none;
+    mix-blend-mode:screen;
+    transform:translate(-50%,-50%);
+    transition:transform 0.1s ease;
+    z-index:9999;
+}
+
+/* PARTICLES */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    width:100%;
+    padding:20px 10%;
+    display:flex;
+    justify-content:space-between;
+    background:rgba(11,19,43,0.6);
+    backdrop-filter:blur(15px);
+    transition:0.4s;
+    z-index:1000;
+}
+
+nav.scrolled{
+    box-shadow:0 0 20px rgba(0,212,255,0.5);
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#00d4ff;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(135deg,#060b1a,#0b132b);
+}
+
+.hero h1{
+    font-size:4rem;
+    letter-spacing:4px;
+}
+
+.hero h2{
+    margin-top:10px;
+    color:#9aa4c3;
+}
+
+.btn{
+    margin-top:30px;
+    padding:12px 35px;
+    border-radius:30px;
+    background:linear-gradient(45deg,#00d4ff,#3a86ff);
+    color:#060b1a;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.4s;
+}
+
+.btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 25px #00d4ff;
+}
+
+/* SECTIONS */
+section{
+    padding:120px 10%;
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+
+section.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+/* PREMIUM CARD */
+.card{
+    background:rgba(17,28,58,0.7);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(20px);
+    transition:0.5s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 30px rgba(0,212,255,0.5);
+}
+
+/* HOVER OVERLAY */
+.card::before{
+    content:"View Project";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,212,255,0.15);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transition:0.4s;
+    font-weight:600;
+}
+
+.card:hover::before{
+    opacity:1;
+}
+
+/* STATS */
+.stats{
+    display:flex;
+    justify-content:space-around;
+    flex-wrap:wrap;
+    margin-top:40px;
+}
+
+.stat{
+    text-align:center;
+    margin:20px;
+}
+
+.stat h3{
+    font-size:2.5rem;
+    color:#00d4ff;
+}
+
+/* CONTACT */
+.contact-btn{
+    display:inline-block;
+    margin:15px;
+    padding:12px 30px;
+    border-radius:30px;
+    border:2px solid #00d4ff;
+    color:#00d4ff;
+    text-decoration:none;
+    transition:0.4s;
+}
+
+.contact-btn:hover{
+    background:#00d4ff;
+    color:#060b1a;
+    box-shadow:0 0 20px #00d4ff;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px;
+    background:#0b132b;
+    color:#9aa4c3;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cursor"></div>
+<canvas id="particles"></canvas>
+
+<nav id="navbar">
+    <div><strong>ALDRY</strong></div>
+    <div>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>ALDRY</h1>
+    <h2>Cinematic Graphic Designer</h2>
+    <a href="#work" class="btn">Explore Work</a>
+</div>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p>I create powerful sports visuals, cinematic posters, and premium digital artwork using Photoshop & Illustrator.</p>
+
+    <div class="stats">
+        <div class="stat">
+            <h3 id="projects">0</h3>
+            <p>Projects</p>
+        </div>
+        <div class="stat">
+            <h3 id="clients">0</h3>
+            <p>Clients</p>
+        </div>
+        <div class="stat">
+            <h3 id="experience">0</h3>
+            <p>Years Experience</p>
+        </div>
+    </div>
+</section>
+
+<section id="work">
+    <h2>Selected Projects</h2>
+    <div class="grid">
+        <div class="card">Final Glory</div>
+        <div class="card">Ultimate Rivalry</div>
+        <div class="card">Rise of Champions</div>
+        <div class="card">Midnight Match</div>
+        <div class="card">Battle of Kings</div>
+        <div class="card">Legends Reborn</div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Let’s Create Something Powerful</h2>
+    <a href="mailto:aldrydzns@gmail.com" class="contact-btn">Send Email</a>
+    <a href="https://wa.me/919497677302" target="_blank" class="contact-btn">Chat on WhatsApp</a>
+</section>
+
+<footer>
+ALDRY ©️ 2026 | Ultra Pro Edition
+</footer>
+
+<script>
+
+/* CURSOR */
+const cursor=document.querySelector(".cursor");
+document.addEventListener("mousemove",(e)=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+});
+
+/* NAV SHADOW */
+window.addEventListener("scroll",()=>{
+document.getElementById("navbar").classList.toggle("scrolled",window.scrollY>50);
+});
+
+/* SCROLL REVEAL */
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top<window.innerHeight-100){
+sec.classList.add("show");
+}
+});
+});
+
+/* COUNTER */
+function animateValue(id,start,end,duration){
+let obj=document.getElementById(id);
+let range=end-start;
+let startTime=null;
+function step(timestamp){
+if(!startTime)startTime=timestamp;
+let progress=Math.min((timestamp-startTime)/duration,1);
+obj.textContent=Math.floor(progress*range+start);
+if(progress<1)requestAnimationFrame(step);
+}
+requestAnimationFrame(step);
+}
+
+window.onload=()=>{
+animateValue("projects",0,50,2000);
+animateValue("clients",0,20,2000);
+animateValue("experience",0,3,2000);
+};
+
+/* PARTICLES */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+radius:Math.random()*2,
+dx:(Math.random()-0.5),
+dy:(Math.random()-0.5)
+});
+}
+
+function animateParticles(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+ctx.fillStyle="rgba(0,212,255,0.6)";
+ctx.fill();
+p.x+=p.dx;
+p.y+=p.dy;
+});
+requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+</script>
+
+</body>
+</html>
